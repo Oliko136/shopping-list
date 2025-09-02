@@ -132,11 +132,16 @@ function checkUI() {
     }
 }
 
-// Event listeners
-itemForm.addEventListener('submit', onAddItemSubmit);
-itemList.addEventListener('click', removeItem);
-clearBtn.addEventListener('click', clearItems);
-itemFilter.addEventListener('input', filterItems);
-document.addEventListener('DOMContentLoaded', displayItems);
+// Initialize app
+function init() {
+    // Event listeners
+    itemForm.addEventListener('submit', onAddItemSubmit);
+    itemList.addEventListener('click', removeItem);
+    clearBtn.addEventListener('click', clearItems);
+    itemFilter.addEventListener('input', filterItems);
+    document.addEventListener('DOMContentLoaded', displayItems);
 
-checkUI();
+    checkUI();
+}
+
+init();
