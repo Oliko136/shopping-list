@@ -2,6 +2,7 @@ const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
+const itemFilter = document.getElementById('filter');
 
 // Add item feature
 function addItem(e) {
@@ -22,7 +23,10 @@ function addItem(e) {
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button);
 
+    // Add li to the DOM
     itemList.appendChild(li);
+    
+    checkUI();
 
     itemInput.value = '';
 }
@@ -49,6 +53,8 @@ function removeItem(e) {
     if (e.target.parentElement.classList.contains('remove-item')) {
         if (confirm('Are you sure you want to delete this item?')) {
             e.target.parentElement.parentElement.remove();
+
+            checkUI();
         }
     }
 }
@@ -58,9 +64,26 @@ function clearItems() {
     while (itemList.firstChild) {
         itemList.removeChild(itemList.firstChild);
     }
-} 
+
+    checkUI();
+}
+
+// Check and clear UI state feature
+function checkUI() {
+    const items = itemList.querySelectorAll('li');
+
+    if (items.length === 0) {
+        clearBtn.style.display = 'none';
+        itemFilter.style.display = 'none';
+    } else {
+        clearBtn.style.display = 'block';
+        itemFilter.style.display = 'block';
+    }
+}
 
 // Event listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
+
+checkUI();
