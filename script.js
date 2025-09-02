@@ -27,7 +27,7 @@ function onAddItemSubmit(e) {
         return;
     }
 
-    // Check for edit mode
+    // Check for edit mode or duplicate items
     if (isEditMode) {
         const itemToEdit = itemList.querySelector('.edit-mode');
 
@@ -35,6 +35,11 @@ function onAddItemSubmit(e) {
         itemToEdit.classList.remove('edit-mode');
         itemToEdit.remove();
         isEditMode = false;
+    } else {
+        if (doesItemExist(newItem)) {
+            alert('That item is already on the list!');
+            return;
+        }
     }
 
     // Create item DOM element
@@ -105,6 +110,13 @@ function onClickItem(e) {
     if (e.target.tagName === 'LI') {
         setItemToEdit(e.target);
     }
+}
+
+// Check if item already exists
+function doesItemExist(item) {
+    const itemsFromStorage = getItemsFromStorage();
+
+    return itemsFromStorage.includes(item);
 }
 
 // Remove item feature
