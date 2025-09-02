@@ -2,6 +2,7 @@ const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 
+// Add item feature
 function addItem(e) {
     e.preventDefault();
 
@@ -42,5 +43,15 @@ function createIcon(classes) {
     return icon;
 }
 
+// Remove item feature
+function removeItem(e) {
+    if (e.target.parentElement.classList.contains('remove-item')) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            e.target.parentElement.parentElement.remove();
+        }
+    }
+}
+
 // Event listeners
 itemForm.addEventListener('submit', addItem);
+itemList.addEventListener('click', removeItem);
